@@ -11,11 +11,9 @@ def listaaleatorio(x):
      """
       lista =[0] * x
       for i in range(x):
-          a= random.randint(-3,3)
-          if a !=0 :
-              lista[i]=a
-          else:
-              pass     
+          a= random.randint(-4,4)
+          lista[i]=a
+              
       return lista 
   
 def sorting(number_array):
@@ -25,11 +23,9 @@ def sorting(number_array):
     
     util=[]
     for i in number_array: 
-        for j in number_array:
-            c=sorted(j,key=abs,reverse=True)
+            c=sorted(i,key=abs,reverse=True)
             util.append(c)
-            
-        return util
+    return util
 ##pedirle un numero al usuario
 
 n=6
@@ -39,7 +35,7 @@ if n%2==0:
     m = ((n/2)-1)
     m = int(m)    
     total=[]   
-    for i in range(10000):
+    for i in range(2500):
     ###### llenado de listas l y k 
         l= listaaleatorio(m)   
         #rint(l)
@@ -83,9 +79,12 @@ if n%2==0:
         else:
             total.append(z)  
             
-            
-    #convierto un total en un array
+        
+    # # organiza los arrays al reves y convierto un total en un array 
+    total=sorting(total)
     total =np.array(total) 
+    
+     
     # uso la funcion unique para encontrar los valores que no se repiten
     total = np.unique(total,axis=0)
     final =[]
@@ -93,24 +92,14 @@ if n%2==0:
         for j in total:
             d=np.array(j/np.gcd.reduce(j))
             final.append(d)
-            
-     
-    #uso de la funcion sorting para ordenacion en valor absoluto 
-    final=sorting(final)
-    # organiza los arrays al reves
-    #final1=[]
-    #for i in final:
-            #c=i[::-1]
-            #final1.append(c)
-           
-            
-    final1=np.array(final) 
+    final1=np.array(final)
     final1 =np.unique(final1,axis=0)
     
-    final1=final1[final1[:,0]<30]
-    final1=final1[final1[:,0]>-30]
+    final1=final1[final1[:,0]<12]
+    final1=final1[final1[:,0]>0]
     final=final1.astype(int)
-    print(final)   
+    print(final)
+              
 
 #construccion de parte en en caso de que sea impar 
 else:
@@ -168,16 +157,25 @@ else:
    total= np.sort(total)
    total = np.unique(total,axis=0)
    final =[]
-     #elimino los arrays que tiene z mayor a 12
+     #elimino los arrays
    for i in total:
          for j in total:
              d=np.sort(np.array(j/np.gcd.reduce(j)))
              final.append(d)
-   final =np.unique(final,axis=0)  
-   print(final.astype(int))
-    
-   for i in final:
-         print(i)
-   print(len(final))
+             
+   final=sorting(final)
+   # organiza los arrays al reves
+   #final1=[]
+   #for i in final:
+           #c=i[::-1]
+           #final1.append(c)
+          
+           
+   final1=np.array(final)
+   final1 =np.unique(final1,axis=0)
    
+   final1=final1[final1[:,0]<12]
+   final1=final1[final1[:,0]>0]
+   final=final1.astype(int)
+   print(final1)
      
